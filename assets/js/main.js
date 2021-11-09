@@ -1,7 +1,7 @@
 // variables
 let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
-let carrito = [];
+let carrito = JSON.parse( localStorage.getItem('carrito') ) || []
 let btnAgregar = [];
 
 
@@ -12,11 +12,6 @@ fetch("https://apipetshop.herokuapp.com/api/articulos")
     articulos = data.response.filter((e) => e.tipo === chamber)
     ejecucion(articulos)
   });
-
-
-
-
-
 
 // Funciones
 function ejecucion(articulos) {
@@ -64,5 +59,5 @@ function agregarCarrito(){
 
 function buscarEnArray(id) {
   carrito.push(articulos.filter((item) => item._id === id));
-  console.table(carrito);
+  localStorage.setItem('carrito', JSON.stringify(carrito) )
 }
