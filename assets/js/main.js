@@ -1,19 +1,26 @@
-let articulos = [];
+// variables
 let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
-let carrito = [];
+let articulos = [];
+let carrito = JSON.parse( localStorage.getItem('carrito') ) || []
 let btnAgregar = [];
 
+
+// Traer los productos de la api
 fetch("https://apipetshop.herokuapp.com/api/articulos")
   .then((res) => res.json())
   .then((data) => {
-    chamber === "Medicamento"
-      ? (articulos = data.response.filter((e) => e.tipo === chamber))
-      : (articulos = data.response.filter((e) => e.tipo === chamber));
-    articulos.sort((a, b) => a.descripcion.length - b.descripcion.length);
-    chamber === "Medicamento" ? ejecucion(articulos) : ejecucion(articulos);
+    articulos = data.response.filter((e) => e.tipo === chamber)
+    ejecucion(articulos)
   });
 
+// Funciones
 function ejecucion(articulos) {
+  renderArticulos(articulos)
+  agregarCarrito()
+}
+
+
+function renderArticulos(articulos){
   articulos.forEach((item) => {
     let { _id, nombre, descripcion, precio, imagen, stock } = item;
     let contenedor = document.querySelector("#contenedor");
@@ -38,7 +45,9 @@ function ejecucion(articulos) {
    `;
     contenedor.appendChild(div);
   });
+}
 
+function agregarCarrito(){
   btnAgregar = document.querySelectorAll(".agregar-carrito");
   btnAgregar.forEach((boton) => {
     boton.addEventListener("click", (e) => {
