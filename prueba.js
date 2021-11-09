@@ -6,10 +6,8 @@ let btnAgregar = []
 fetch("https://apipetshop.herokuapp.com/api/articulos")
   .then((res) => res.json())
   .then((data) => {
-    chamber === "Medicamento"
-      ? (articulos = data.response.filter((e) => e.tipo === chamber))
-      : (articulos = data.response.filter((e) => e.tipo === chamber));
-    chamber === "Medicamento" ? ejecucion(articulos) : ejecucion(articulos);
+    articulos = data.response.filter((e) => e.tipo === chamber)
+    ejecucion(articulos)
   });
 
 function ejecucion(articulos) {
