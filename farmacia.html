@@ -1,70 +1,293 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>Franco Petshop | Farmacia</title>
-    <link rel="icon" type="image/png" sizes="500x355" href="assets/img/logo_small.png">
-    <link rel="icon" type="image/png" sizes="500x355" href="assets/img/logo_small.png">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/untitled.css">
-</head>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="500x355"
+      href="assets/img/logo_small.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="500x355"
+      href="assets/img/logo_small.png"
+    />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+    />
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/untitled.css" />
+  </head>
 
-<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72">
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-dark text-uppercase" id="mainNav">
-        <div class="container"><a class="navbar-brand" href="#page-top"><img src="assets/img/logo_small.png" width="100"></a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-info navbar-toggler-right text-uppercase rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.html">Inicio</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="contacto.html">contacto</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link active py-3 px-0 px-lg-3 rounded" href="farmacia.html">farmacia</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="juguetes.html">juguetes</a></li>
-                </ul>
-            </div><button class="btn btn-warning ms-3" type="button"><i class="fa fa-shopping-cart"></i></button>
+  <body
+    id="page-top"
+    data-bs-spy="scroll"
+    data-bs-target="#mainNav"
+    data-bs-offset="72"
+  >
+    <nav
+      class="
+        navbar navbar-light navbar-expand-lg
+        fixed-top
+        bg-dark
+        text-uppercase
+      "
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="#page-top"
+          ><img src="assets/img/logo_small.png" width="100" /></a
+        ><button
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          class="
+            navbar-toggler
+            text-white
+            bg-info
+            navbar-toggler-right
+            text-uppercase
+            rounded
+          "
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.html"
+                >Inicio</a
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded" href="contacto.html"
+                >contacto</a
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a
+                class="nav-link active py-3 px-0 px-lg-3 rounded"
+                href="farmacia.html"
+                >farmacia</a
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded" href="juguetes.html"
+                >juguetes</a
+              >
+            </li>
+          </ul>
         </div>
+        <button
+          class="btn btn-warning ms-3"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#modal-1"
+        >
+          <i class="fa fa-shopping-cart"></i>
+        </button>
+      </div>
     </nav>
     <section id="farmacia">
-        <div class="container">
-            <h2 class="text-uppercase text-center text-secondary mb-0">Nuestros productos de farmacia</h2>
-            <hr class="star-dark mb-5">
-            <div class="row row-cols-1 row-cols-md-3 g-4" id='contenedor'>
-
-               
-              
-                
-                </div>
-            </div>
-        </div>
+      <div class="container">
+        <h2 class="text-uppercase text-center text-secondary mb-0">
+          Nuestros productos de farmacia
+        </h2>
+        <hr class="star-dark mb-5" />
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="contenedor"></div>
+      </div>
     </section>
     <footer class="text-center bg-primary footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-5 mb-lg-0 col-md-6">
-                    <h4 class="text-uppercase mb-4">Ubicacion</h4>
-                    <p>2215 John Daniel Drive<br>Clark, MO 65243</p>
-                </div>
-                <div class="col-md-4 mb-5 mb-lg-0 col-md-6">
-                    <h4 class="text-uppercase">nuestras redes</h4>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a class="btn btn-outline-light text-center btn-social rounded-circle" role="button" href="#"><i class="fa fa-facebook fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a class="btn btn-outline-light text-center btn-social rounded-circle" role="button" href="#"><i class="fa fa-google-plus fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a class="btn btn-outline-light text-center btn-social rounded-circle" role="button" href="#"><i class="fa fa-twitter fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a class="btn btn-outline-light text-center btn-social rounded-circle" role="button" href="#"><i class="fa fa-dribbble fa-fw"></i></a></li>
-                    </ul>
-                </div>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-5 mb-lg-0 col-md-6">
+            <h4 class="text-uppercase mb-4">Ubicacion</h4>
+            <p>Rio de Janeiro 300<br />Caballito, CABA</p>
+          </div>
+          <div class="col-md-4 mb-5 mb-lg-0 col-md-6">
+            <h4 class="text-uppercase">nuestras redes</h4>
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a
+                  class="
+                    btn btn-outline-light
+                    text-center
+                    btn-social
+                    rounded-circle
+                  "
+                  role="button"
+                  href="#"
+                  ><i class="fa fa-facebook fa-fw"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a
+                  class="
+                    btn btn-outline-light
+                    text-center
+                    btn-social
+                    rounded-circle
+                  "
+                  role="button"
+                  href="#"
+                  ><i class="fa fa-google-plus fa-fw"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a
+                  class="
+                    btn btn-outline-light
+                    text-center
+                    btn-social
+                    rounded-circle
+                  "
+                  role="button"
+                  href="#"
+                  ><i class="fa fa-twitter fa-fw"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a
+                  class="
+                    btn btn-outline-light
+                    text-center
+                    btn-social
+                    rounded-circle
+                  "
+                  role="button"
+                  href="#"
+                  ><i class="fa fa-dribbble fa-fw"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </footer>
     <div class="text-center text-white bg-info copyright py-4">
-        <div class="container"><small>Copyright © Franco Petshop 2021</small></div>
+      <div class="container">
+        <small>Copyright © Franco Petshop 2021</small>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="modal-1"
+      tabindex="-1"
+      aria-labelledby="modal-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title d-flex align-items-center"
+              id="exampleModalLabel"
+            >
+              <span class="text-info me-4">Tu Carrito</span>
+              <span class="badge bg-primary rounded-pill">1</span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="p-2 px-3 text-uppercase">
+                        Poducto
+                      </div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Precio</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">
+                        Cantidad
+                      </div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Remover</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="modal-tabla">
+                  <tr>
+                    <th class="border-0" scope="row">
+                      <div class="p-2">
+                        <img
+                          class="img-fluid rounded shadow-sm me-1"
+                          src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-1_zrifhn.jpg"
+                          alt
+                          width="70"
+                        />
+                        <div
+                          class="ml-3 d-inline-block align-middle"
+                        >
+                          <h5 class="mb-0">
+                            Medicamento
+                          </h5>
+                          <span
+                            class="
+                              text-muted
+                              font-weight-normal font-italic
+                              d-block
+                            "
+                            >Categoria: Farmacia</span
+                          >
+                        </div>
+                      </div>
+                    </th>
+                    <td class="border-0 align-middle">
+                      <strong>$79.00</strong>
+                    </td>
+                    <td class="border-0 align-middle">
+                      <strong>3</strong>
+                    </td>
+                    <td class="border-0 align-middle">
+                      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Borrar Todo
+            </button>
+            <button type="button" class="btn btn-info">Pagar</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/freelancer.js"></script>
-    <script src="./prueba.js"></script>
-</body>
-
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>
