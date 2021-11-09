@@ -44,11 +44,58 @@ function ejecucion(articulos) {
     boton.addEventListener("click", (e) => {
       console.log(e.target.id);
       buscarEnArray(e.target.id);
+      añadirProductosCarrito();
     });
   });
 }
 
 function buscarEnArray(id) {
-  carrito.push(articulos.filter((item) => item._id === id));
+  carrito.push(articulos.find((item) => item._id === id));
   console.table(carrito);
+}
+
+function añadirProductosCarrito() {
+  const carritoModal = document.querySelector("#modal-tabla");
+  if (carrito.length < 1) {
+    carritoModal.innerHTML = `<tr><td><h5>No hay productos en tu carrito</h5></td></tr>`;
+  } else {
+    carritoModal.innerHTML += `
+          <tr>
+          <th class="border-0" scope="row">
+            <div class="p-2">
+              <img
+                class="img-fluid rounded shadow-sm me-1"
+                src="${carrito[carrito.length-1].imagen}"
+                alt="product0"
+                width="70"
+              />
+              <div
+                class="ml-3 d-inline-block align-middle"
+              >
+                <h5 class="mb-0">
+                  ${carrito[carrito.length-1].nombre}
+                </h5>
+                <span
+                  class="
+                    text-muted
+                    font-weight-normal font-italic
+                    d-block
+                  "
+                  >Categoria: ${carrito[carrito.length-1].tipo}</span
+                >
+              </div>
+            </div>
+          </th>
+          <td class="border-0 align-middle">
+            <strong>$${carrito[carrito.length-1].precio}</strong>
+          </td>
+          <td class="border-0 align-middle">
+            <strong>3</strong>
+          </td>
+          <td class="border-0 align-middle">
+            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+      `;
+  }
 }
