@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/untitled.css">
+    <!-- <link rel="stylesheet" href="assets/css/untitled.css"> -->
+    <link rel="stylesheet" href="./assets/css/contacto.css">
 </head>
 
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72">
@@ -28,30 +29,48 @@
         </div>
     </nav>
     <section id="contact">
-        //esto es un comentario!
+        
         <div class="container">
-            <!-- Prueba de comentario para ver si se guarda -->
-            <!-- otro comentario que pasa -->
-            <h3 class="text-uppercase text-center text-secondary mb-0">Contactanos!</h3>
-            <hr class="star-dark mb-5">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
-                        <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="text" id="name" required="" placeholder="Nombre"><label class="form-label">Nombre</label><small class="form-text text-danger help-block"></small></div>
+                <div class="col-3">
+    
+                </div>
+                <div class="col-6 mt-5">
+                    <form>
+                        <div class=" display-none " id="divAlerta" role="alert">
+                            El mensaje se envio con exito
+                            <span><a href="#" id="alerta">&#10005;</a> </span>
                         </div>
-                        <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="email" id="email" required="" placeholder="Correo"><label class="form-label">Correo</label><small class="form-text text-danger help-block"></small></div>
+                        <h2 class="text-center text-uppercase text-center text-secondary mb-0 mt-5 mb-3">Contactanos!</h2>
+                        <hr class="star-dark mb-5"> </hr>
+                        <div class="mb-3">
+                            
+                            <input  required type="text" class="form-control" id="clientNamelastname"
+                                aria-describedby="clientnamelastname" placeholder="Nombre y Apellido">
                         </div>
-                        <!--comentario adrian-->
-                        <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="tel" id="phone" required="" placeholder="Phone Number"><label class="form-label">Telefono</label><small class="form-text text-danger help-block"></small></div>
+                        <div class="mb-3">
+                            
+                            <input  required type="email" class="form-control" id="clientemail"
+                                aria-describedby="clientemail" placeholder="Email address">
+    
                         </div>
-                        <div class="control-group">
-                            <div class="mb-5 form-floating controls pb-2"><textarea class="form-control" id="message" required="" placeholder="Message" style="height: 150px;"></textarea><label class="form-label">Tu Mensaje!</label><small class="form-text text-danger help-block"></small></div>
+                        <div class="mb-3">
+                           
+                            <input  type="text" class="form-control" id="phone" aria-describedby="phone" placeholder="Phone (Opcional)">
                         </div>
-                        <div id="success"></div>
-                        <div><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Enviar</button></div>
+    
+                        <div class="mb-3">
+                            <input  type="checkbox" class="form-check-input" id="gato">
+                            <label class="form-check-label" for="gato">Gato</label>
+                            <input  type="checkbox" class="form-check-input" id="perro">
+                            <label class="form-check-label" for="perro">Perro</label>
+                        </div>
+    
+                        <div class="mb-3">
+                            <textarea name="" id="" cols="10" rows="5" class="form-control">Hola buenas,</textarea>
+                            <!-- <input type="text-area" class="form-control" id="phone" aria-describedby="phone" placeholder="Phone"> -->
+                        </div>
+                        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
@@ -80,7 +99,8 @@
         <div class="container"><small>Copyright © Franco Petshop 2021</small></div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/freelancer.js"></script>
+    <!-- <script src="assets/js/freelancer.js"></script> -->
+    <script src="./assets/js/contacto.js"></script>
 </body>
 
 </html>
