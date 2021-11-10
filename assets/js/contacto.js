@@ -30,10 +30,6 @@ submit.addEventListener('click', (e) => {
         spanMensaje.innerText = 'Verifique que el campo nombre no esté vacio y que el email sea valido')
             
          
-               
-            
-
-    
     e.preventDefault();
 
 })
@@ -52,15 +48,6 @@ function pruebaemail(valor) {
 }
 
 
-{/* <div class=" display-none " id="divAlerta" role="alert">
-                            <span id="mensajeForm">Formulario enviado con exitos</span>
-                            <span><a href="#" id="alerta">&#10005;</a> </span>
-                        </div>
+ 
 
 
-<div class=" form-switch mt-3 mb-3">
-<input class="form-check-input" type="checkbox" role="switch" id="gato">
-<label class="form-check-label me-5" for="flexSwitchCheckDefault">Gato</label>
-<input class="form-check-input" type="checkbox" role="switch" id="perro">
-<label class="form-check-label" for="flexSwitchCheckDefault">Perro</label>
-</div> */}
