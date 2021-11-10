@@ -3,7 +3,7 @@ let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let btnAgregar = [];
-let precioTotal = document.getElementById("totalAcumulado");
+
 // Traer los productos de la api
 fetch("https://apipetshop.herokuapp.com/api/articulos")
   .then((res) => res.json())
@@ -111,18 +111,13 @@ function añadirProductosCarrito() {
       <strong>${e.cantidad}</strong>
     </td>
     <td class="border-0 align-middle">
-    <strong>$${e.precio * e.cantidad}</strong>
-  </td>
-    <td class="border-0 align-middle">
-      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+      <button class="btn btn-danger borrar-carrito"><i class="fa fa-trash"></i></button>
     </td>
       `;
       fragment.appendChild(tr);
       return total += e.precio * e.cantidad
     });
     carritoModal.appendChild(fragment);
-    
-    precioTotal.textContent = `${total}`;
   }
 }
 
@@ -134,27 +129,28 @@ function crearAlertaCarrito() {
   }, 1000);
 }
 
-function botonesCarrito() {
-  btnBorrarTodo = document.querySelector("#borrar-todo");
-  btnBorrarTodo.addEventListener("click", (e) => {
-    carrito.splice(0, carrito.length);
-    renderCarrito();
-  });
-  console.log("123");
+function botonesCarrito(){
+  btnBorrarTodo = document.querySelector("#borrar-todo")
+  btnBorrarTodo.addEventListener("click", e=>{
+    carrito.splice(0,carrito.length)
+    renderCarrito()
+  })
+  console.log('123')
 }
 
-function buscarEnArrayBorrar(id) {
-  console.log("Find item: " + carrito.find((item) => item._id === id));
-  carrito.splice(carrito.indexOf(carrito.find((item) => item._id === id)), 1);
+function buscarEnArrayBorrar(id){
+  console.log("Find item: "+carrito.find(item=> item._id === id))
+  carrito.splice(carrito.indexOf(carrito.find(item=> item._id === id)), 1)
+
 }
 
-function borrarCarrito() {
+function borrarCarrito(){
   btnBorrar = document.querySelectorAll(".borrar-carrito");
-  btnBorrar.forEach((boton) => {
-    boton.addEventListener("click", (e) => {
+  btnBorrar.forEach(boton => {
+    boton.addEventListener("click", e=>{
       buscarEnArrayBorrar(e.target.id);
       renderCarrito();
       borrarCarrito();
-    });
-  });
+    })
+  })
 }
