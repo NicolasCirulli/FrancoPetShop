@@ -118,6 +118,7 @@ function añadirProductosCarrito() {
       return total += e.precio * e.cantidad
     });
     carritoModal.appendChild(fragment);
+    
   }
 }
 
