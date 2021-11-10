@@ -3,6 +3,7 @@ let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let btnAgregar = [];
+let totalAcumulado = document.querySelector('#total')
 
 // Traer los productos de la api
 fetch("https://apipetshop.herokuapp.com/api/articulos")
@@ -111,14 +112,17 @@ function añadirProductosCarrito() {
       <strong>${e.cantidad}</strong>
     </td>
     <td class="border-0 align-middle">
-      <button class="btn btn-danger borrar-carrito"><i class="fa fa-trash"></i></button>
+    <strong>$${e.precio * e.cantidad}</strong>
+  </td>
+    <td class="border-0 align-middle">
+      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
     </td>
       `;
       fragment.appendChild(tr);
       return total += e.precio * e.cantidad
     });
     carritoModal.appendChild(fragment);
-    
+    totalAcumulado.textContent = `${total}`;
   }
 }
 
