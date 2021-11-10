@@ -137,7 +137,7 @@ function renderCarrito() {
               <strong>3</strong>
             </td>
             <td class="border-0 align-middle">
-              <button id="${articulo._id}" class="btn btn-danger borrar-carrito"><i class="fa fa-trash"></i></button>
+              <button id="${articulo._id}" class="btn btn-danger borrar-carrito"><i id="${articulo._id}" class="fa fa-trash"></i></button>
             </td>
           </tr>
         `;
