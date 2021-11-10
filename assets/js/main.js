@@ -110,14 +110,13 @@ function añadirProductosCarrito() {
       <strong>${e.cantidad}</strong>
     </td>
     <td class="border-0 align-middle">
-      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+      <button class="btn btn-danger borrar-carrito"><i class="fa fa-trash"></i></button>
     </td>
       `;
 
       fragment.appendChild(tr);
     });
     carritoModal.appendChild(fragment);
-    
   }
 }
 
@@ -127,4 +126,30 @@ function crearAlertaCarrito(){
   setTimeout(() => {
     alerta.classList.replace('fixed-bottom','d-none');
   }, 1000);
+}
+
+function botonesCarrito(){
+  btnBorrarTodo = document.querySelector("#borrar-todo")
+  btnBorrarTodo.addEventListener("click", e=>{
+    carrito.splice(0,carrito.length)
+    renderCarrito()
+  })
+  console.log('123')
+}
+
+function buscarEnArrayBorrar(id){
+  console.log("Find item: "+carrito.find(item=> item._id === id))
+  carrito.splice(carrito.indexOf(carrito.find(item=> item._id === id)), 1)
+
+}
+
+function borrarCarrito(){
+  btnBorrar = document.querySelectorAll(".borrar-carrito");
+  btnBorrar.forEach(boton => {
+    boton.addEventListener("click", e=>{
+      buscarEnArrayBorrar(e.target.id);
+      renderCarrito();
+      borrarCarrito();
+    })
+  })
 }
