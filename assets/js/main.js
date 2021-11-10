@@ -27,9 +27,9 @@ function renderArticulos(articulos){
     let div = document.createElement("div");
     div.classList = "col";
     div.innerHTML = `
-                        <div class="card">
+                        <div class="card card-h">
                           <img class="card-img-top w-75 d-block align-self-center" src=${imagen} height>
-                          <div class="card card-body border-0">
+                          <div class="card card-body border-0 justify-content-between">
                             <h5 class="card-title text-center">${nombre}</h5>
                             <p class="card-text">${descripcion}</p>
                             <p class="card-text">$${precio}</p>
