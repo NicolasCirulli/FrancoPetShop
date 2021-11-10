@@ -16,8 +16,8 @@ fetch("https://apipetshop.herokuapp.com/api/articulos")
 // Funciones
 function ejecucion(articulos) {
   renderArticulos(articulos)
+  botonesCarrito()
   agregarCarrito()
-  borrarCarrito()
 }
 
 
@@ -48,6 +48,14 @@ function renderArticulos(articulos){
   });
 }
 
+function botonesCarrito(){
+  btnBorrarTodo = document.querySelector("#borrar-todo")
+  btnBorrarTodo.addEventListener("click", e=>{
+    carrito.splice(0,carrito.length)
+    renderCarrito()
+  })
+}
+
 function agregarCarrito(){
   btnAgregar = document.querySelectorAll(".agregar-carrito");
   btnAgregar.forEach((boton) => {
@@ -63,7 +71,6 @@ function borrarCarrito(){
   btnBorrar = document.querySelectorAll(".borrar-carrito");
   btnBorrar.forEach(boton => {
     boton.addEventListener("click", e=>{
-      console.log("FUNCIONANDO")
       buscarEnArrayBorrar(e.target.id);
       renderCarrito();
     })
@@ -77,6 +84,9 @@ function buscarEnArray(id) {
 
 function buscarEnArrayBorrar(id){
   carrito.splice(carrito.indexOf(carrito.find(item=> item._id === id)), 1)
+  console.table(carrito)
+  console.log(carrito.indexOf(carrito.find(item=> item._id === id)))
+  console.log(id)
 }
 
 function renderCarrito() {
@@ -125,5 +135,6 @@ function renderCarrito() {
           </tr>
         `;
     })
+    borrarCarrito();
   }
 }
