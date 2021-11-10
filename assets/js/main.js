@@ -60,10 +60,11 @@ function agregarCarrito(){
 }
 
 function borrarCarrito(){
-  btnBorrar = document.querySelectorAll(`#borrar`);
+  btnBorrar = document.querySelectorAll(".borrar-carrito");
   btnBorrar.forEach(boton => {
-    boton.addEventListener("click", (e)=>{
-      boton.parentElement.remove;
+    boton.addEventListener("click", e=>{
+      console.log("FUNCIONANDO")
+      buscarEnArrayBorrar(e.target.id);
       renderCarrito();
     })
   })
@@ -83,6 +84,7 @@ function renderCarrito() {
   if (carrito.length < 1) {
     carritoModal.innerHTML = `<tr><td><h5>No hay productos en tu carrito</h5></td></tr>`;
   } else {
+    carritoModal.innerHTML = ``
     carrito.forEach(articulo=>{
       carritoModal.innerHTML += `
             <tr>
