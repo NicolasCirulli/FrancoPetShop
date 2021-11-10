@@ -1,28 +1,27 @@
 // variables
 let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
-let carrito = JSON.parse( localStorage.getItem('carrito') ) || []
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let btnAgregar = [];
-
 
 // Traer los productos de la api
 fetch("https://apipetshop.herokuapp.com/api/articulos")
   .then((res) => res.json())
   .then((data) => {
-    articulos = data.response.filter((e) => e.tipo === chamber)
-    ejecucion(articulos)
+    articulos = data.response.filter((e) => e.tipo === chamber);
+    ejecucion(articulos);
   });
 
 // Funciones
 function ejecucion(articulos) {
-  renderArticulos(articulos)
-  agregarCarrito()
+  renderArticulos(articulos);
+  agregarCarrito();
 }
 
-
-function renderArticulos(articulos){
+function renderArticulos(articulos) {
   articulos.forEach((item) => {
     let { _id, nombre, descripcion, precio, imagen, stock } = item;
+
     let contenedor = document.querySelector("#contenedor");
     let div = document.createElement("div");
     div.classList = "col";
@@ -47,7 +46,7 @@ function renderArticulos(articulos){
   });
 }
 
-function agregarCarrito(){
+function agregarCarrito() {
   btnAgregar = document.querySelectorAll(".agregar-carrito");
   btnAgregar.forEach((boton) => {
     boton.addEventListener("click", (e) => {
@@ -59,10 +58,16 @@ function agregarCarrito(){
 }
 
 function buscarEnArray(id) {
-  carrito.push(articulos.find((item) => item._id === id));
-  console.table(carrito);
+  let articuloAux = articulos.find((item) => item._id === id);
+  if (carrito.find((item) => item._id === id)) {
+    articuloAux.cantidad++;
+  } else {
+    articuloAux.cantidad = 1;
+    carrito.push(articuloAux);
+  }
 }
 
+/*
 function añadirProductosCarrito() {
   const carritoModal = document.querySelector("#modal-tabla");
   if (carrito.length < 1) {
@@ -99,7 +104,7 @@ function añadirProductosCarrito() {
             <strong>$${carrito[carrito.length-1].precio}</strong>
           </td>
           <td class="border-0 align-middle">
-            <strong>3</strong>
+            <strong>${carrito.cantidad}</strong>
           </td>
           <td class="border-0 align-middle">
             <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
@@ -108,6 +113,59 @@ function añadirProductosCarrito() {
       `;
   }
 }
+*/
 
+function añadirProductosCarrito() {
+  const carritoModal = document.querySelector("#modal-tabla");
+  let fragment = document.createDocumentFragment();
+  if (carrito.length < 1) {
+    carritoModal.innerHTML = `<tr><td><h5>No hay productos en tu carrito</h5></td></tr>`;
+  } else {
+    carritoModal.innerHTML = ""
+    carrito.forEach((e) => {
+      let tr = document.createElement("tr");
+      tr.innerHTML = `  
+      <th class="border-0" scope="row">
+      <div class="p-2">
+        <img
+          class="img-fluid rounded shadow-sm me-1"
+          src="${e.imagen}"
+          alt="product0"
+          width="70"
+        />
+        <div
+          class="ml-3 d-inline-block align-middle"
+        >
+          <h5 class="mb-0">
+            ${e.nombre}
+          </h5>
+          <span
+            class="
+              text-muted
+              font-weight-normal font-italic
+              d-block
+            "
+            >Categoria: ${e.tipo}</span
+          >
+        </div>
+      </div>
+    </th>
+    <td class="border-0 align-middle">
+      <strong>$${e.precio * e.cantidad}</strong>
+    </td>
+    <td class="border-0 align-middle">
+      <strong>${e.cantidad}</strong>
+    </td>
+    <td class="border-0 align-middle">
+      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+    </td>
+      `;
+
+      fragment.appendChild(tr);
+    });
+    carritoModal.appendChild(fragment);
+    
+  }
+}
 
 /*prueba */
