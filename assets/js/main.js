@@ -53,6 +53,7 @@ function agregarCarrito() {
       console.log(e.target.id);
       buscarEnArray(e.target.id);
       añadirProductosCarrito();
+      crearAlertaCarrito();
     });
   });
 }
@@ -118,4 +119,12 @@ function añadirProductosCarrito() {
     carritoModal.appendChild(fragment);
     
   }
+}
+
+function crearAlertaCarrito(){
+  let alerta = document.querySelector('#alerta-carrito');
+  alerta.classList.replace('d-none','fixed-bottom')
+  setTimeout(() => {
+    alerta.classList.replace('fixed-bottom','d-none');
+  }, 1000);
 }
