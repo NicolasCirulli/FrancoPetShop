@@ -1,4 +1,7 @@
-#contact {
+#contact, #farmacia, #juguetes {
   padding-top: 11rem;
 }
 
+.card-h{
+  height: 700px;
+}
