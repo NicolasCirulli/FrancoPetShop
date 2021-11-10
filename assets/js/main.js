@@ -60,7 +60,6 @@ function agregarCarrito(){
   btnAgregar = document.querySelectorAll(".agregar-carrito");
   btnAgregar.forEach((boton) => {
     boton.addEventListener("click", (e) => {
-      //console.log(e.target.id);
       buscarEnArray(e.target.id);
       renderCarrito();
       borrarCarrito();
@@ -73,7 +72,6 @@ function borrarCarrito(){
   btnBorrar.forEach(boton => {
     boton.addEventListener("click", e=>{
       buscarEnArrayBorrar(e.target.id);
-      console.log(e.target.id)
       renderCarrito();
       borrarCarrito();
     })
@@ -86,14 +84,9 @@ function buscarEnArray(id) {
 }
 
 function buscarEnArrayBorrar(id){
-  console.log("Find item: "+carrito.find(item=> item._id === id))
-  //console.table("Carrito 1: "+carrito)
+ 
   carrito.splice(carrito.indexOf(carrito.find(item=> item._id === id)), 1)
-  //console.table("Carrito 2: "+carrito)
-  //console.log(carrito.indexOf(carrito.find(item=> item._id === id)))
-  
-  //console.log(carrito.findIndex((item)=> item._id === id))
-  //console.log(id)
+
 }
 
 function renderCarrito() {
