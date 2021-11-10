@@ -17,6 +17,7 @@ fetch("https://apipetshop.herokuapp.com/api/articulos")
 function ejecucion(articulos) {
   renderArticulos(articulos)
   agregarCarrito()
+  borrarCarrito()
 }
 
 
@@ -53,9 +54,19 @@ function agregarCarrito(){
     boton.addEventListener("click", (e) => {
       console.log(e.target.id);
       buscarEnArray(e.target.id);
-      añadirProductosCarrito();
+      renderCarrito();
     });
   });
+}
+
+function borrarCarrito(){
+  btnBorrar = document.querySelectorAll(`#borrar`);
+  btnBorrar.forEach(boton => {
+    boton.addEventListener("click", (e)=>{
+      boton.parentElement.remove;
+      renderCarrito();
+    })
+  })
 }
 
 function buscarEnArray(id) {
@@ -63,50 +74,54 @@ function buscarEnArray(id) {
   console.table(carrito);
 }
 
-function añadirProductosCarrito() {
+function buscarEnArrayBorrar(id){
+  carrito.splice(carrito.indexOf(carrito.find(item=> item._id === id)), 1)
+}
+
+function renderCarrito() {
   const carritoModal = document.querySelector("#modal-tabla");
   if (carrito.length < 1) {
     carritoModal.innerHTML = `<tr><td><h5>No hay productos en tu carrito</h5></td></tr>`;
   } else {
-    carritoModal.innerHTML += `
-          <tr>
-          <th class="border-0" scope="row">
-            <div class="p-2">
-              <img
-                class="img-fluid rounded shadow-sm me-1"
-                src="${carrito[carrito.length-1].imagen}"
-                alt="product0"
-                width="70"
-              />
-              <div
-                class="ml-3 d-inline-block align-middle"
-              >
-                <h5 class="mb-0">
-                  ${carrito[carrito.length-1].nombre}
-                </h5>
-                <span
-                  class="
-                    text-muted
-                    font-weight-normal font-italic
-                    d-block
-                  "
-                  >Categoria: ${carrito[carrito.length-1].tipo}</span
+    carrito.forEach(articulo=>{
+      carritoModal.innerHTML += `
+            <tr>
+            <th class="border-0" scope="row">
+              <div class="p-2">
+                <img
+                  class="img-fluid rounded shadow-sm me-1"
+                  src="${articulo.imagen}"
+                  alt="product0"
+                  width="70"
+                />
+                <div
+                  class="ml-3 d-inline-block align-middle"
                 >
+                  <h5 class="mb-0">
+                    ${articulo.nombre}
+                  </h5>
+                  <span
+                    class="
+                      text-muted
+                      font-weight-normal font-italic
+                      d-block
+                    "
+                    >Categoria: ${articulo.tipo}</span
+                  >
+                </div>
               </div>
-            </div>
-          </th>
-          <td class="border-0 align-middle">
-            <strong>$${carrito[carrito.length-1].precio}</strong>
-          </td>
-          <td class="border-0 align-middle">
-            <strong>3</strong>
-          </td>
-          <td class="border-0 align-middle">
-            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-      `;
+            </th>
+            <td class="border-0 align-middle">
+              <strong>$${articulo.precio}</strong>
+            </td>
+            <td class="border-0 align-middle">
+              <strong>3</strong>
+            </td>
+            <td class="border-0 align-middle">
+              <button id="${articulo.id}" class="btn btn-danger borrar-carrito"><i class="fa fa-trash"></i></button>
+            </td>
+          </tr>
+        `;
+    })
   }
 }
-
-
