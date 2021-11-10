@@ -1,9 +1,10 @@
 // variables
 let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+let carrito = [];
 let btnAgregar = [];
 let totalAcumulado = document.querySelector('#total')
+let largoCarrito = document.querySelector('#largoCarrito')
 
 // Traer los productos de la api
 fetch("https://apipetshop.herokuapp.com/api/articulos")
@@ -53,8 +54,9 @@ function agregarCarrito() {
     boton.addEventListener("click", (e) => {
       console.log(e.target.id);
       buscarEnArray(e.target.id);
-      añadirProductosCarrito();
+      renderTabla();
       crearAlertaCarrito();
+      borrarProducto()
     });
   });
 }
@@ -69,7 +71,7 @@ function buscarEnArray(id) {
   }
 }
 
-function añadirProductosCarrito() {
+function renderTabla() {
   const carritoModal = document.querySelector("#modal-tabla");
   let fragment = document.createDocumentFragment();
   let total = 0;
@@ -78,13 +80,14 @@ function añadirProductosCarrito() {
   } else {
     carritoModal.innerHTML = "";
     carrito.forEach((e) => {
+      let { _id, nombre, precio, imagen, tipo,cantidad} = e;
       let tr = document.createElement("tr");
       tr.innerHTML = `  
       <th class="border-0" scope="row">
       <div class="p-2">
         <img
           class="img-fluid rounded shadow-sm me-1"
-          src="${e.imagen}"
+          src="${imagen}"
           alt="product0"
           width="70"
         />
@@ -92,7 +95,7 @@ function añadirProductosCarrito() {
           class="ml-3 d-inline-block align-middle"
         >
           <h5 class="mb-0">
-            ${e.nombre}
+            ${nombre}
           </h5>
           <span
             class="
@@ -100,31 +103,36 @@ function añadirProductosCarrito() {
               font-weight-normal font-italic
               d-block
             "
-            >Categoria: ${e.tipo}</span
+            >Categoria: ${tipo}</span
           >
         </div>
       </div>
     </th>
     <td class="border-0 align-middle">
-      <strong>$${e.precio}</strong>
+      <strong>$${precio}</strong>
     </td>
     <td class="border-0 align-middle">
-      <strong>${e.cantidad}</strong>
+      <strong>${cantidad}</strong>
     </td>
     <td class="border-0 align-middle">
-    <strong>$${e.precio * e.cantidad}</strong>
+    <strong>$${precio * cantidad}</strong>
   </td>
     <td class="border-0 align-middle">
-      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+      <button class="btn btn-danger borrar-carrito" id="${_id}"" ><i class="fa fa-trash borrar-carrito" ></i></button>
     </td>
       `;
       fragment.appendChild(tr);
+      
       return total += e.precio * e.cantidad
     });
     carritoModal.appendChild(fragment);
     totalAcumulado.textContent = `${total}`;
   }
+  largoCarrito.textContent = carrito.length
+  
 }
+
+
 
 function crearAlertaCarrito() {
   let alerta = document.querySelector("#alerta-carrito");
@@ -132,30 +140,34 @@ function crearAlertaCarrito() {
   setTimeout(() => {
     alerta.classList.replace("fixed-bottom", "d-none");
   }, 1000);
+  btnCarrito();
 }
 
-function botonesCarrito(){
+function btnCarrito(){
   btnBorrarTodo = document.querySelector("#borrar-todo")
-  btnBorrarTodo.addEventListener("click", e=>{
+  btnBorrarTodo.addEventListener("click", ()=>{
     carrito.splice(0,carrito.length)
-    renderCarrito()
+    renderTabla()
+    totalAcumulado.textContent = "0";
   })
-  console.log('123')
 }
 
 function buscarEnArrayBorrar(id){
-  console.log("Find item: "+carrito.find(item=> item._id === id))
-  carrito.splice(carrito.indexOf(carrito.find(item=> item._id === id)), 1)
-
+  // console.log(carrito.indexOf(  carrito.find( item => item._id === id)   ))
+  carrito.splice(   carrito.indexOf(  carrito.find( item => item._id === id)   )    , 1)
+  console.log('se ejecuto')
 }
 
-function borrarCarrito(){
+function borrarProducto(){
+  
   btnBorrar = document.querySelectorAll(".borrar-carrito");
   btnBorrar.forEach(boton => {
     boton.addEventListener("click", e=>{
       buscarEnArrayBorrar(e.target.id);
-      renderCarrito();
-      borrarCarrito();
+      renderTabla();
+      borrarProducto()
     })
   })
+  
 }
+
