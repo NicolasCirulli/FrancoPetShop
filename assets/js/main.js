@@ -1,10 +1,16 @@
 // variables
 let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem('carrito')) || []
 let btnAgregar = [];
 let totalAcumulado = document.querySelector('#total')
 let largoCarrito = document.querySelector('#largoCarrito')
+
+
+if(carrito.length > 1){
+  renderTabla()
+  borrarProducto()
+}
 
 // Traer los productos de la api
 fetch("https://apipetshop.herokuapp.com/api/articulos")
@@ -57,6 +63,7 @@ function agregarCarrito() {
       renderTabla();
       crearAlertaCarrito();
       borrarProducto()
+      localStorage.setItem('carrito',JSON.stringify(carrito))
     });
   });
 }
@@ -77,6 +84,7 @@ function renderTabla() {
   let total = 0;
   if (carrito.length < 1) {
     carritoModal.innerHTML = `<tr><td><h5>No hay productos en tu carrito</h5></td></tr>`;
+    totalAcumulado.textContent = ``;
   } else {
     carritoModal.innerHTML = "";
     carrito.forEach((e) => {
@@ -118,7 +126,7 @@ function renderTabla() {
     <strong>$${precio * cantidad}</strong>
   </td>
     <td class="border-0 align-middle">
-      <button class="btn btn-danger borrar-carrito" id="${_id}"" ><i class="fa fa-trash borrar-carrito" ></i></button>
+      <button class="btn btn-danger borrar-carrito" id="${_id}" >X</button>
     </td>
       `;
       fragment.appendChild(tr);
@@ -129,7 +137,8 @@ function renderTabla() {
     totalAcumulado.textContent = `${total}`;
   }
   largoCarrito.textContent = carrito.length
-  
+
+  localStorage.setItem('carrito',JSON.stringify(carrito))
 }
 
 
@@ -148,14 +157,12 @@ function btnCarrito(){
   btnBorrarTodo.addEventListener("click", ()=>{
     carrito.splice(0,carrito.length)
     renderTabla()
-    totalAcumulado.textContent = "0";
+    totalAcumulado.textContent = "";
   })
 }
 
 function buscarEnArrayBorrar(id){
-  // console.log(carrito.indexOf(  carrito.find( item => item._id === id)   ))
-  carrito.splice(   carrito.indexOf(  carrito.find( item => item._id === id)   )    , 1)
-  console.log('se ejecuto')
+  carrito.splice(carrito.indexOf(  carrito.find( item => item._id === id) )  , 1)
 }
 
 function borrarProducto(){
@@ -170,4 +177,3 @@ function borrarProducto(){
   })
   
 }
-
