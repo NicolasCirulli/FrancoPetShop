@@ -157,6 +157,13 @@ function renderTabla() {
   largoCarrito.forEach(badge => badge.textContent = carrito.length);
 
   localStorage.setItem('carrito',JSON.stringify(carrito))
+  
+  let btnPago = document.querySelector("#btn-pago");
+  if(carrito.length == 0){
+    btnPago.classList.add('disabled');
+  } else {
+    btnPago.classList.remove('disabled');
+  }
 }
 
 
@@ -186,6 +193,14 @@ function btnCarrito(){
     totalAcumulado.textContent = "";
   })
 }
+
+function pagarTodo(){
+  carrito.splice(0,carrito.length)
+  renderTabla()
+  totalAcumulado.textContent = "";
+}
+btnPago = document.querySelector("#btn-pago");
+btnPago.addEventListener("click", pagarTodo) 
 
 function buscarEnArrayBorrar(id){
   carrito.splice(carrito.indexOf(  carrito.find( item => item._id === id) )  , 1)
