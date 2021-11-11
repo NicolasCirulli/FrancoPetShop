@@ -30,6 +30,7 @@
     />
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/css/untitled.css" />
+    <link rel="stylesheet" href="./assets/css/contacto.css" />
   </head>
 
   <body
@@ -93,7 +94,8 @@
             </li>
           </ul>
         </div>
-        <button class="btn btn-warning ms-3" type="button">
+        <button class="btn btn-warning ms-3" type="button" data-bs-toggle="modal"
+        data-bs-target="#modal-1">
           <i class="fa fa-shopping-cart"></i>
         </button>
       </div>
@@ -108,7 +110,7 @@
           <div class="col-lg-8 mx-auto">
             <form id="contactForm" name="sentMessage" novalidate="novalidate">
               <div class="control-group">
-                <div class="mb-0 form-floating controls pb-2">
+                <div class="mb-0 form-floating controls">
                   <input
                     class="form-control"
                     type="text"
@@ -120,7 +122,7 @@
                 </div>
               </div>
               <div class="control-group">
-                <div class="mb-0 form-floating controls pb-2">
+                <div class="mb-0 form-floating controls">
                   <input
                     class="form-control"
                     type="email"
@@ -132,19 +134,42 @@
                 </div>
               </div>
               <div class="control-group">
-                <div class="mb-0 form-floating controls pb-2">
+                <div class="mb-0 form-floating controls">
                   <input
                     class="form-control"
                     type="tel"
                     id="phone"
                     required=""
                     placeholder="Phone Number"
-                  /><label class="form-label">Telefono</label
+                  /><label class="form-label">Telefono (Opcional)</label
                   ><small class="form-text text-danger help-block"></small>
+                </div>
+
+                <div class="form-check form-check-inline form-switch my-3 me-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="gato"
+                  />
+                  <label class="form-check-label" for="gato"
+                    >Gato</label
+                  >
+                </div>
+                <div class="form-check form-check-inline form-switch my-3">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="perro"
+                  />
+                  <label class="form-check-label" for="perro"
+                    >Perro</label
+                  >
                 </div>
               </div>
               <div class="control-group">
-                <div class="mb-5 form-floating controls pb-2">
+                <div class="mb-3 form-floating controls">
                   <textarea
                     class="form-control"
                     id="message"
@@ -156,10 +181,13 @@
                   ><small class="form-text text-danger help-block"></small>
                 </div>
               </div>
-              <div id="success"></div>
-              <div>
+              <div class="display-none" id="divAlerta" role="alert">
+                <span id="mensajeForm">Formulario enviado con exitos</span>
+                <span><a href="#" id="alerta">&#10005;</a> </span>
+              </div>
+              <div class="d-grid col-6 mx-auto">
                 <button
-                  class="btn btn-primary btn-xl"
+                  class="btn btn-primary btn-lg"
                   id="sendMessageButton"
                   type="submit"
                 >
@@ -243,7 +271,84 @@
         <small>Copyright © Franco Petshop 2021</small>
       </div>
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/freelancer.js"></script>
+
+    <div
+      class="modal fade"
+      id="modal-1"
+      tabindex="-1"
+      aria-labelledby="modal-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title d-flex align-items-center"
+              id="exampleModalLabel"
+            >
+              <span class="text-info me-4">Tu Carrito</span>
+              <span class="badge bg-primary rounded-pill" id="largoCarrito"></span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="p-2 px-3 text-uppercase">Poducto</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Precio Unidad</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Cantidad</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Precio Total</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Remover</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="modal-tabla">
+                  
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3"></td>
+                    <td class="table-active fw-bold text-uppercase">Total</td>
+                    <td id="total-field"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              id="borrar-todo"
+            >
+              Borrar Todo
+            </button>
+            <button type="button" class="btn btn-info">Pagar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/js/freelancer.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/contacto.js"></script>
   </body>
 </html>

@@ -184,6 +184,10 @@
         <small>Copyright © Franco Petshop 2021</small>
       </div>
     </div>
+    <div id="alerta-carrito" class="alert alert-success d-none w-25 mx-auto">
+      <i class="fa fa-check-circle me-3"></i>
+      Producto añadido a tu carrito!
+    </div>
 
     <div
       class="modal fade"
@@ -200,7 +204,7 @@
               id="exampleModalLabel"
             >
               <span class="text-info me-4">Tu Carrito</span>
-              <span class="badge bg-primary rounded-pill">1</span>
+              <span class="badge bg-primary rounded-pill" id="largoCarrito"></span>
             </h5>
             <button
               type="button"
@@ -215,17 +219,16 @@
                 <thead>
                   <tr>
                     <th class="border-0 bg-light" scope="col">
-                      <div class="p-2 px-3 text-uppercase">
-                        Poducto
-                      </div>
+                      <div class="p-2 px-3 text-uppercase">Poducto</div>
                     </th>
                     <th class="border-0 bg-light" scope="col">
-                      <div class="py-2 text-uppercase">Precio</div>
+                      <div class="py-2 text-uppercase">Precio Unidad</div>
                     </th>
                     <th class="border-0 bg-light" scope="col">
-                      <div class="py-2 text-uppercase">
-                        Cantidad
-                      </div>
+                      <div class="py-2 text-uppercase">Cantidad</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Precio Total</div>
                     </th>
                     <th class="border-0 bg-light" scope="col">
                       <div class="py-2 text-uppercase">Remover</div>
@@ -235,14 +238,23 @@
                 <tbody id="modal-tabla">
                   
                 </tbody>
+                <tfoot id="modal-foot">
+                  <tr>
+                    <td colspan="3"></td>
+                    <td class="table-active fw-bold text-uppercase">Total</td>
+                    <td id="total-field"></td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
           <div class="modal-footer">
             <button
+              id="borrar-todo"
               type="button"
               class="btn btn-danger"
               data-bs-dismiss="modal"
+              id="borrar-todo"
             >
               Borrar Todo
             </button>

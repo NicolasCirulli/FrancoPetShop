@@ -1,28 +1,39 @@
 // variables
 let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
-let carrito = JSON.parse( localStorage.getItem('carrito') ) || []
+let carrito = JSON.parse(localStorage.getItem('carrito')) || []
 let btnAgregar = [];
+let totalAcumulado = document.querySelector('#total-field')
+let largoCarrito = document.querySelector('#largoCarrito')
 
+
+if(carrito.length > 1){
+  renderTabla()
+  borrarProducto()
+}
 
 // Traer los productos de la api
 fetch("https://apipetshop.herokuapp.com/api/articulos")
   .then((res) => res.json())
   .then((data) => {
-    articulos = data.response.filter((e) => e.tipo === chamber)
-    ejecucion(articulos)
+    articulos = data.response.filter((e) => e.tipo === chamber);
+    ejecucion(articulos);
   });
 
 // Funciones
 function ejecucion(articulos) {
-  renderArticulos(articulos)
-  agregarCarrito()
+  renderArticulos(articulos);
+  agregarCarrito();
+  renderTabla();
+  crearAlertaCarrito();
+  borrarProducto()
+  localStorage.setItem('carrito',JSON.stringify(carrito))
 }
 
-
-function renderArticulos(articulos){
+function renderArticulos(articulos) {
   articulos.forEach((item) => {
     let { _id, nombre, descripcion, precio, imagen, stock } = item;
+
     let contenedor = document.querySelector("#contenedor");
     let div = document.createElement("div");
     div.classList = "col";
@@ -47,64 +58,137 @@ function renderArticulos(articulos){
   });
 }
 
-function agregarCarrito(){
+function agregarCarrito() {
   btnAgregar = document.querySelectorAll(".agregar-carrito");
   btnAgregar.forEach((boton) => {
     boton.addEventListener("click", (e) => {
-      console.log(e.target.id);
       buscarEnArray(e.target.id);
-      añadirProductosCarrito();
+      renderTabla();
+      crearAlertaCarrito();
+      borrarProducto()
+      localStorage.setItem('carrito',JSON.stringify(carrito))
     });
   });
 }
 
-function buscarEnArray(id) {
-  carrito.push(articulos.find((item) => item._id === id));
-  console.table(carrito);
+function borrarCarrito(){
+  btnBorrar = document.querySelectorAll(".borrar-carrito");
+  btnBorrar.forEach(boton => {
+    boton.addEventListener("click", e=>{
+      buscarEnArrayBorrar(e.target.id);
+      renderTabla();
+      borrarCarrito();
+    })
+  })
 }
 
-function añadirProductosCarrito() {
-  const carritoModal = document.querySelector("#modal-tabla");
-  if (carrito.length < 1) {
-    carritoModal.innerHTML = `<tr><td><h5>No hay productos en tu carrito</h5></td></tr>`;
+function buscarEnArray(id) {
+  let articuloAux = articulos.find((item) => item._id === id);
+  let item = carrito.find(item=>item._id === id)
+  if (item) {
+    item.cantidad++;
   } else {
-    carritoModal.innerHTML += `
-          <tr>
-          <th class="border-0" scope="row">
-            <div class="p-2">
-              <img
-                class="img-fluid rounded shadow-sm me-1"
-                src="${carrito[carrito.length-1].imagen}"
-                alt="product0"
-                width="70"
-              />
-              <div
-                class="ml-3 d-inline-block align-middle"
-              >
-                <h5 class="mb-0">
-                  ${carrito[carrito.length-1].nombre}
-                </h5>
-                <span
-                  class="
-                    text-muted
-                    font-weight-normal font-italic
-                    d-block
-                  "
-                  >Categoria: ${carrito[carrito.length-1].tipo}</span
-                >
-              </div>
-            </div>
-          </th>
-          <td class="border-0 align-middle">
-            <strong>$${carrito[carrito.length-1].precio}</strong>
-          </td>
-          <td class="border-0 align-middle">
-            <strong>3</strong>
-          </td>
-          <td class="border-0 align-middle">
-            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-      `;
+    articuloAux.cantidad = 1;
+    carrito.push(articuloAux);
   }
+}
+
+function renderTabla() {
+  const carritoModal = document.querySelector("#modal-tabla");
+  let fragment = document.createDocumentFragment();
+  let total = 0;
+  if (carrito.length < 1) {
+    carritoModal.innerHTML = `<tr><td colspan="5"><h5 class="text-center">No hay productos en tu carrito</h5></td></tr>`;
+    totalAcumulado.textContent = ``;
+  } else {
+    carritoModal.innerHTML = "";
+    carrito.forEach((e) => {
+      let { _id, nombre, precio, imagen, tipo,cantidad} = e;
+      let tr = document.createElement("tr");
+      tr.innerHTML = `  
+      <th class="border-0" scope="row">
+      <div class="p-2">
+        <img
+          class="img-fluid rounded shadow-sm me-1"
+          src="${imagen}"
+          alt="product0"
+          width="70"
+        />
+        <div
+          class="ml-3 d-inline-block align-middle"
+        >
+          <h5 class="mb-0">
+            ${nombre}
+          </h5>
+          <span
+            class="
+              text-muted
+              font-weight-normal font-italic
+              d-block
+            "
+            >Categoria: ${tipo}</span
+          >
+        </div>
+      </div>
+    </th>
+    <td class="border-0 align-middle">
+      <strong>$${precio}</strong>
+    </td>
+    <td class="border-0 align-middle">
+      <strong>${cantidad}</strong>
+    </td>
+    <td class="border-0 align-middle">
+    <strong>$${precio * cantidad}</strong>
+  </td>
+    <td class="border-0 align-middle">
+      <button class="btn btn-danger borrar-carrito" id="${_id}" >X</button>
+    </td>
+      `;
+      fragment.appendChild(tr);
+      
+      return total += e.precio * e.cantidad
+    });
+    carritoModal.appendChild(fragment);
+    totalAcumulado.textContent = `${total}`;
+  }
+  largoCarrito.textContent = carrito.length
+
+  localStorage.setItem('carrito',JSON.stringify(carrito))
+}
+
+
+
+function crearAlertaCarrito() {
+  let alerta = document.querySelector("#alerta-carrito");
+  alerta.classList.replace("d-none", "fixed-bottom");
+  setTimeout(() => {
+    alerta.classList.replace("fixed-bottom", "d-none");
+  }, 1000);
+  btnCarrito();
+}
+
+function btnCarrito(){
+  btnBorrarTodo = document.querySelector("#borrar-todo")
+  btnBorrarTodo.addEventListener("click", ()=>{
+    carrito.splice(0,carrito.length)
+    renderTabla()
+    totalAcumulado.textContent = "";
+  })
+}
+
+function buscarEnArrayBorrar(id){
+  carrito.splice(carrito.indexOf(  carrito.find( item => item._id === id) )  , 1)
+}
+
+function borrarProducto(){
+  
+  btnBorrar = document.querySelectorAll(".borrar-carrito");
+  btnBorrar.forEach(boton => {
+    boton.addEventListener("click", e=>{
+      buscarEnArrayBorrar(e.target.id);
+      renderTabla();
+      borrarProducto()
+    })
+  })
+  
 }
