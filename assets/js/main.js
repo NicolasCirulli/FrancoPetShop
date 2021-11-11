@@ -24,6 +24,10 @@ fetch("https://apipetshop.herokuapp.com/api/articulos")
 function ejecucion(articulos) {
   renderArticulos(articulos);
   agregarCarrito();
+  renderTabla();
+  crearAlertaCarrito();
+  borrarProducto()
+  localStorage.setItem('carrito',JSON.stringify(carrito))
 }
 
 function renderArticulos(articulos) {
@@ -72,7 +76,7 @@ function borrarCarrito(){
   btnBorrar.forEach(boton => {
     boton.addEventListener("click", e=>{
       buscarEnArrayBorrar(e.target.id);
-      renderCarrito();
+      renderTabla();
       borrarCarrito();
     })
   })
@@ -80,8 +84,9 @@ function borrarCarrito(){
 
 function buscarEnArray(id) {
   let articuloAux = articulos.find((item) => item._id === id);
-  if (carrito.find((item) => item._id === id)) {
-    articuloAux.cantidad++;
+  let item = carrito.find(item=>item._id === id)
+  if (item) {
+    item.cantidad++;
   } else {
     articuloAux.cantidad = 1;
     carrito.push(articuloAux);
