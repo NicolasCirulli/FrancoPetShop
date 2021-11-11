@@ -3,7 +3,7 @@ let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let btnAgregar = [];
-let totalAcumulado = document.querySelector("#total");
+let totalAcumulado = document.querySelector("#total-field");
 let largoCarrito = document.querySelector("#largoCarrito");
 
 if (carrito.length > 1) {
@@ -23,6 +23,10 @@ fetch("https://apipetshop.herokuapp.com/api/articulos")
 function ejecucion(articulos) {
   renderArticulos(articulos);
   agregarCarrito();
+  renderTabla();
+  crearAlertaCarrito();
+  borrarProducto();
+  localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 function renderArticulos(articulos) {
@@ -57,7 +61,6 @@ function agregarCarrito() {
   btnAgregar = document.querySelectorAll(".agregar-carrito");
   btnAgregar.forEach((boton) => {
     boton.addEventListener("click", (e) => {
-      console.log(e.target.id);
       buscarEnArray(e.target.id);
       renderTabla();
       crearAlertaCarrito();
@@ -67,10 +70,22 @@ function agregarCarrito() {
   });
 }
 
+function borrarCarrito() {
+  btnBorrar = document.querySelectorAll(".borrar-carrito");
+  btnBorrar.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      buscarEnArrayBorrar(e.target.id);
+      renderTabla();
+      borrarCarrito();
+    });
+  });
+}
+
 function buscarEnArray(id) {
   let articuloAux = articulos.find((item) => item._id === id);
-  if (carrito.find((item) => item._id === id)) {
-    articuloAux.cantidad++;
+  let item = carrito.find((item) => item._id === id);
+  if (item) {
+    item.cantidad++;
   } else {
     articuloAux.cantidad = 1;
     carrito.push(articuloAux);
