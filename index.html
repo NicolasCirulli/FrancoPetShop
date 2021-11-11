@@ -93,7 +93,8 @@
             </li>
           </ul>
         </div>
-        <button class="btn btn-warning ms-3" type="button">
+        <button class="btn btn-warning ms-3" type="button" data-bs-toggle="modal"
+        data-bs-target="#modal-1">
           <i class="fa fa-shopping-cart"></i>
         </button>
       </div>
@@ -129,7 +130,9 @@
           <div class="col-lg-6 ms-auto">
             <h3 class="text-center">Nuestra historia:</h3>
             <p class="lead">
-              Nuestra tienda "Franco" es mas que una Pet-shop convencional, nuestro proposito es mejorar el día a día de nuestros amiguitos. Por ello "Franco" quien fue rescatado de las calles por un grupo de amigos decidimos abrir una tienda que no solo se encarga de lucrar, sino que parte de esas ganancias es para ayudar a nuestros amiguitos sin familia y encontrarle una como nosotros pudimos con "Franco".   
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum dignissimos aut sequi explicabo fuga magnam officiis adipisci consequatur tempora tempore nobis sint, ipsa voluptate possimus eos hic dolor itaque consectetur architecto praesentium dicta ipsam! Pariatur praesentium earum nam nesciunt? Modi nam sit dolorem error eligendi incidunt maxime, quo laudantium quam?
+
+              
             </p>
           </div>
           <div class="col-lg-6 me-auto d-flex flex-column align-items-center">
@@ -218,7 +221,82 @@
         <small>Copyright © Franco Petshop 2021</small>
       </div>
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/freelancer.js"></script>
+
+    <div
+      class="modal fade"
+      id="modal-1"
+      tabindex="-1"
+      aria-labelledby="modal-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title d-flex align-items-center"
+              id="exampleModalLabel"
+            >
+              <span class="text-info me-4">Tu Carrito</span>
+              <span class="badge bg-primary rounded-pill" id="largoCarrito"></span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="p-2 px-3 text-uppercase">Poducto</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Precio Unidad</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Cantidad</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Precio Total</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Remover</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="modal-tabla">
+                  
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" id="total"></td>
+                    <td class="table-active fw-bold text-uppercase">Total</td>
+                    <td id="total-field"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              id="borrar-todo"
+            >
+              Borrar Todo
+            </button>
+            <button type="button" class="btn btn-info">Pagar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/js/freelancer.js"></script>
+    <script src="./assets/js/main.js" ></script>
   </body>
 </html>
