@@ -1,5 +1,5 @@
 // variables
-let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
+ let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
 let carrito = JSON.parse(localStorage.getItem('carrito')) || []
 let btnAgregar = [];
@@ -22,11 +22,13 @@ fetch("https://apipetshop.herokuapp.com/api/articulos")
 
 // Funciones
 function ejecucion(articulos) {
-  renderArticulos(articulos);
-  agregarCarrito();
+  if(document.querySelector('#farmacia') || document.querySelector('#juguetes') ){
+    renderArticulos(articulos);
+    agregarCarrito();
+  }
   renderTabla();
-  crearAlertaCarrito();
-  borrarProducto()
+  borrarProducto();
+  btnCarrito();
   localStorage.setItem('carrito',JSON.stringify(carrito))
 }
 
@@ -64,7 +66,6 @@ function agregarCarrito() {
     boton.addEventListener("click", (e) => {
       buscarEnArray(e.target.id);
       renderTabla();
-      crearAlertaCarrito();
       borrarProducto()
       localStorage.setItem('carrito',JSON.stringify(carrito))
     });
@@ -85,11 +86,13 @@ function borrarCarrito(){
 function buscarEnArray(id) {
   let articuloAux = articulos.find((item) => item._id === id);
   let item = carrito.find(item=>item._id === id)
+  let itemEnArticulos = articulos.find(item=>item._id === id)
   if (item) {
-    item.cantidad++;
+    item.cantidad < itemEnArticulos.stock ?  (item.cantidad++ , crearAlertaCarrito(true)) :  crearAlertaCarrito(false)
   } else {
     articuloAux.cantidad = 1;
     carrito.push(articuloAux);
+    crearAlertaCarrito(true);
   }
 }
 
@@ -151,19 +154,27 @@ function renderTabla() {
     carritoModal.appendChild(fragment);
     totalAcumulado.textContent = `${total}`;
   }
-  largoCarrito.forEach(badge => badge.textContent = carrito.length);
+  largoCarrito.textContent = carrito.length
 
   localStorage.setItem('carrito',JSON.stringify(carrito))
 }
 
 
 
-function crearAlertaCarrito() {
+function crearAlertaCarrito(booleano) {
   let alerta = document.querySelector("#alerta-carrito");
   alerta.classList.replace("d-none", "fixed-bottom");
+
+  if(booleano){
+    alerta.textContent = "Agregado al carrito"
+    alerta.classList.replace("alert-warning", "alert-success");
+  }else{
+    alerta.textContent = "Las unidades disponibles ya estan en el carrito de compras"
+    alerta.classList.replace("alert-success", "alert-warning");
+  }
   setTimeout(() => {
     alerta.classList.replace("fixed-bottom", "d-none");
-  }, 1000);
+  }, 1500);
   btnCarrito();
 }
 
