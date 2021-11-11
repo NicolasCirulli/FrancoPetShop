@@ -98,7 +98,7 @@ function renderTabla() {
   let fragment = document.createDocumentFragment();
   let total = 0;
   if (carrito.length < 1) {
-    carritoModal.innerHTML = `<tr><td><h5>No hay productos en tu carrito</h5></td></tr>`;
+    carritoModal.innerHTML = `<tr><td colspan="5"><h5 class="text-center">No hay productos en tu carrito</h5></td></tr>`;
     totalAcumulado.textContent = ``;
   } else {
     carritoModal.innerHTML = "";
