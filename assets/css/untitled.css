@@ -1,4 +1,17 @@
-#contact {
+#contact, #farmacia, #juguetes {
   padding-top: 11rem;
 }
 
+.card-h{
+  height: 700px;
+}
+
+.btn-carrito {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+}
+
+.lead {
+  text-align: justify;
+}
