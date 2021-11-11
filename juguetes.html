@@ -93,7 +93,12 @@
             </li>
           </ul>
         </div>
-        <button class="btn btn-warning ms-3" type="button">
+        <button
+          class="btn btn-warning ms-3"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#modal-1"
+        >
           <i class="fa fa-shopping-cart"></i>
         </button>
       </div>
@@ -177,6 +182,84 @@
     <div class="text-center text-white bg-info copyright py-4">
       <div class="container">
         <small>Copyright © Franco Petshop 2021</small>
+      </div>
+    </div>
+    <div id="alerta-carrito" class="alert alert-success d-none w-25 mx-auto">
+      <i class="fa fa-check-circle me-3"></i>
+      Producto añadido a tu carrito!
+    </div>
+
+    <div
+      class="modal fade"
+      id="modal-1"
+      tabindex="-1"
+      aria-labelledby="modal-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title d-flex align-items-center"
+              id="exampleModalLabel"
+            >
+              <span class="text-info me-4">Tu Carrito</span>
+              <span class="badge bg-primary rounded-pill" id="largoCarrito"></span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="p-2 px-3 text-uppercase">Poducto</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Precio Unidad</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Cantidad</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Precio Total</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                      <div class="py-2 text-uppercase">Remover</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="modal-tabla">
+                  
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3"></td>
+                    <td class="table-active fw-bold text-uppercase">Total</td>
+                    <td id="total-field"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              id="borrar-todo"
+            >
+              Borrar Todo
+            </button>
+            <button type="button" class="btn btn-info">Pagar</button>
+          </div>
+        </div>
       </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
