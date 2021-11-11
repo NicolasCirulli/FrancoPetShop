@@ -24,6 +24,13 @@ fetch("https://apipetshop.herokuapp.com/api/articulos")
 function ejecucion(articulos) {
   renderArticulos(articulos);
   agregarCarrito();
+<<<<<<< HEAD
+=======
+  renderTabla();
+  crearAlertaCarrito();
+  borrarProducto()
+  localStorage.setItem('carrito',JSON.stringify(carrito))
+>>>>>>> 9b845616a60696375af38c3ef45c4d0e2739d18d
 }
 
 function renderArticulos(articulos) {
@@ -58,7 +65,6 @@ function agregarCarrito() {
   btnAgregar = document.querySelectorAll(".agregar-carrito");
   btnAgregar.forEach((boton) => {
     boton.addEventListener("click", (e) => {
-      console.log(e.target.id);
       buscarEnArray(e.target.id);
       renderTabla();
       crearAlertaCarrito();
@@ -74,15 +80,17 @@ function borrarCarrito(){
     boton.addEventListener("click", e=>{
       console.log("FUNCIONANDO")
       buscarEnArrayBorrar(e.target.id);
-      renderCarrito();
+      renderTabla();
+      borrarCarrito();
     })
   })
 }
 
 function buscarEnArray(id) {
   let articuloAux = articulos.find((item) => item._id === id);
-  if (carrito.find((item) => item._id === id)) {
-    articuloAux.cantidad++;
+  let item = carrito.find(item=>item._id === id)
+  if (item) {
+    item.cantidad++;
   } else {
     articuloAux.cantidad = 1;
     carrito.push(articuloAux);
@@ -94,7 +102,7 @@ function renderTabla() {
   let fragment = document.createDocumentFragment();
   let total = 0;
   if (carrito.length < 1) {
-    carritoModal.innerHTML = `<tr><td><h5>No hay productos en tu carrito</h5></td></tr>`;
+    carritoModal.innerHTML = `<tr><td colspan="5"><h5 class="text-center">No hay productos en tu carrito</h5></td></tr>`;
     totalAcumulado.textContent = ``;
   } else {
     carritoModal.innerHTML = "";
@@ -187,4 +195,8 @@ function borrarProducto(){
     })
   })
   
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9b845616a60696375af38c3ef45c4d0e2739d18d
