@@ -154,7 +154,7 @@ function renderTabla() {
     carritoModal.appendChild(fragment);
     totalAcumulado.textContent = `${total}`;
   }
-  largoCarrito.textContent = carrito.length
+  largoCarrito.forEach(badge => badge.textContent = carrito.length);
 
   localStorage.setItem('carrito',JSON.stringify(carrito))
 }
