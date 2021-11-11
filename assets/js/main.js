@@ -4,7 +4,7 @@ let articulos = [];
 let carrito = JSON.parse(localStorage.getItem('carrito')) || []
 let btnAgregar = [];
 let totalAcumulado = document.querySelector('#total-field')
-let largoCarrito = document.querySelector('#largoCarrito')
+let largoCarrito = document.querySelectorAll('#largoCarrito')
 
 
 if(carrito.length > 1){
@@ -151,7 +151,7 @@ function renderTabla() {
     carritoModal.appendChild(fragment);
     totalAcumulado.textContent = `${total}`;
   }
-  largoCarrito.textContent = carrito.length
+  largoCarrito.forEach(badge => badge.textContent = carrito.length);
 
   localStorage.setItem('carrito',JSON.stringify(carrito))
 }

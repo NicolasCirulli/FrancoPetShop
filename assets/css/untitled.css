@@ -5,3 +5,9 @@
 .card-h{
   height: 700px;
 }
+
+.btn-carrito {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+}
