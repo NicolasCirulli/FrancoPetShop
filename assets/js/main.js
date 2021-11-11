@@ -7,7 +7,7 @@ let totalAcumulado = document.querySelector('#total-field')
 let largoCarrito = document.querySelector('#largoCarrito')
 
 
-if(carrito.length > 1){
+if(carrito.length >= 1){
   renderTabla()
   borrarProducto()
 }
