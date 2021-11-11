@@ -3,7 +3,7 @@ let chamber = document.querySelector("#farmacia") ? "Medicamento" : "Juguete";
 let articulos = [];
 let carrito = JSON.parse(localStorage.getItem('carrito')) || []
 let btnAgregar = [];
-let totalAcumulado = document.querySelector('#total')
+let totalAcumulado = document.querySelector('#total-field')
 let largoCarrito = document.querySelector('#largoCarrito')
 
 
