@@ -287,7 +287,7 @@
               id="exampleModalLabel"
             >
               <span class="text-info me-4">Tu Carrito</span>
-              <span class="badge bg-primary rounded-pill">1</span>
+              <span class="badge bg-primary rounded-pill" id="largoCarrito"></span>
             </h5>
             <button
               type="button"
@@ -321,10 +321,11 @@
                 <tbody id="modal-tabla">
                   
                 </tbody>
-                <tfoot id="modal-foot">
+                <tfoot>
                   <tr>
-                    <td colspan="3" id="total"></td>
+                    <td colspan="3"></td>
                     <td class="table-active fw-bold text-uppercase">Total</td>
+                    <td id="total-field"></td>
                   </tr>
                 </tfoot>
               </table>
@@ -335,6 +336,7 @@
               type="button"
               class="btn btn-danger"
               data-bs-dismiss="modal"
+              id="borrar-todo"
             >
               Borrar Todo
             </button>
@@ -344,9 +346,9 @@
       </div>
     </div>
     
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/freelancer.js"></script>
-
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/js/freelancer.js"></script>
+    <script src="./assets/js/main.js"></script>
     <script src="./assets/js/contacto.js"></script>
   </body>
 </html>
